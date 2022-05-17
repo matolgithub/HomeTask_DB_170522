@@ -1,0 +1,32 @@
+CREATE USER user_130522 WITH PASSWORD '******';
+CREATE DATABASE hometask_db_130522;
+ALTER DATABASE hometask_db_130522 OWNER TO user_130522;
+
+CREATE TABLE IF NOT EXISTS style_list (
+	id SERIAL PRIMARY KEY,
+	style_name VARCHAR(20) NOT NULL
+);
+COMMENT ON TABLE style_list IS 'Table with the list of sing styles.';
+
+CREATE TABLE IF NOT EXISTS singer_list (
+	id SERIAL PRIMARY KEY,
+	singer_name VARCHAR(40) NOT NULL,
+	style_id INTEGER REFERENCES style_list(id)
+);
+COMMENT ON TABLE singer_list IS 'Table with the list of singers.';
+
+CREATE TABLE IF NOT EXISTS album_list (
+	id SERIAL PRIMARY KEY,
+	album_name VARCHAR(40) NOT NULL,
+	release_year INTEGER CHECK(release_year>=1900 AND release_year<=2022),
+	singer_id INTEGER REFERENCES singer_list(id)
+);
+COMMENT ON TABLE album_list IS 'Table with the list of albums.';
+
+CREATE TABLE IF NOT EXISTS track_list (
+	id SERIAL PRIMARY KEY,
+	track_name VARCHAR(40) NOT NULL,
+	track_time INTEGER CHECK(track_time>0 AND track_time<=3600),
+	album_id INTEGER REFERENCES album_list(id)
+);
+COMMENT ON TABLE track_list IS 'Table with the list of tracks.';
