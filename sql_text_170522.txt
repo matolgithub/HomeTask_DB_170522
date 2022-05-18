@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS singer_list (
 
 CREATE TABLE IF NOT EXISTS style_singer (
 	id SERIAL PRIMARY KEY,
-	style_id INTEGER NOT NULL REFERENCES style_list(id)
+	style_id INTEGER NOT NULL REFERENCES style_list(id),
 	singer_id INTEGER NOT NULL REFERENCES singer_list(id)
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS album_list (
 
 CREATE TABLE IF NOT EXISTS singer_album (
 	id SERIAL PRIMARY KEY,
-	album_id INTEGER NOT NULL REFERENCES album_list(id)
+	album_id INTEGER NOT NULL REFERENCES album_list(id),
 	singer_id INTEGER NOT NULL REFERENCES singer_list(id)
 );
 
@@ -45,6 +45,6 @@ CREATE TABLE IF NOT EXISTS collection (
 
 CREATE TABLE IF NOT EXISTS collection_track (
 	id SERIAL PRIMARY KEY,
-	collection_id INTEGER NOT NULL REFERENCES collection(id)
+	collection_id INTEGER NOT NULL REFERENCES collection(id),
 	track_id INTEGER NOT NULL REFERENCES track_list(id)
 );

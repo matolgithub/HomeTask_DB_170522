@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS administration (
+	id SERIAL PRIMARY KEY,
+	administr_name VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS department (
+	id SERIAL PRIMARY KEY,
+	dep_name VARCHAR(40) NOT NULL
+	administration_id INTEGER NOT NULL REFERENCES administration(id)
+);
+
+CREATE TABLE IF NOT EXISTS employee_list (
+	id SERIAL PRIMARY KEY,
+	full_name VARCHAR(60) NOT NULL
+	department_id INTEGER NOT NULL REFERENCES department(id)
+);
+
+CREATE TABLE IF NOT EXISTS empl_admin (
+	id SERIAL PRIMARY KEY,
+	employee_id INTEGER NOT NULL REFERENCES employee_list(id),
+	administration_id INTEGER NOT NULL REFERENCES administration(id)
+);
